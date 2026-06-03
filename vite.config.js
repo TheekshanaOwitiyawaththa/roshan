@@ -1,0 +1,32 @@
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { bunny } from 'laravel-vite-plugin/fonts';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/admin.js',
+                'resources/js/admin-calendar.js',
+            ],
+            refresh: true,
+            fonts: [
+                bunny('Hanken Grotesk', {
+                    weights: [500, 600, 700],
+                }),
+                bunny('DM Sans', {
+                    weights: [400],
+                }),
+            ],
+        }),
+        tailwindcss(),
+    ],
+    server: {
+        watch: {
+            ignored: ['**/storage/framework/views/**'],
+        },
+    },
+});

@@ -1,0 +1,349 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../../resources/views/**/*.blade.php';
+
+@theme {
+    /* Elite Mastery Aesthetic — DESIGN.md */
+    --color-primary-fixed-dim: #aacec3;
+    --color-on-secondary-container: #785a1a;
+    --color-surface-container: #eeeeee;
+    --color-tertiary-container: #4f2d26;
+    --color-on-error: #ffffff;
+    --color-on-primary-fixed-variant: #2b4d44;
+    --color-on-secondary-fixed-variant: #5d4201;
+    --color-on-primary-container: #83a69c;
+    --color-on-tertiary-container: #c4948a;
+    --color-outline: #717976;
+    --color-inverse-on-surface: #f1f1f1;
+    --color-surface-variant: #e2e2e2;
+    --color-on-primary: #ffffff;
+    --color-tertiary: #361812;
+    --color-surface-dim: #dadada;
+    --color-surface-bright: #f9f9f9;
+    --color-error-container: #ffdad6;
+    --color-on-tertiary: #ffffff;
+    --color-on-tertiary-fixed-variant: #623d36;
+    --color-inverse-surface: #303030;
+    --color-surface-container-highest: #e2e2e2;
+    --color-on-surface: #1b1b1b;
+    --color-inverse-primary: #aacec3;
+    --color-primary: #01261f;
+    --color-secondary: #775a19;
+    --color-secondary-container: #fed488;
+    --color-on-primary-fixed: #00201a;
+    --color-background: #f9f9f9;
+    --color-error: #ba1a1a;
+    --color-primary-container: #1a3c34;
+    --color-tertiary-fixed: #ffdad3;
+    --color-surface-tint: #43655c;
+    --color-secondary-fixed-dim: #e9c176;
+    --color-on-tertiary-fixed: #30130d;
+    --color-on-secondary: #ffffff;
+    --color-surface-container-high: #e8e8e8;
+    --color-surface: #f9f9f9;
+    --color-on-background: #1b1b1b;
+    --color-on-error-container: #93000a;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f3f3f3;
+    --color-primary-fixed: #c5eadf;
+    --color-secondary-fixed: #ffdea5;
+    --color-outline-variant: #c1c8c4;
+    --color-tertiary-fixed-dim: #efbab0;
+    --color-on-surface-variant: #414846;
+    --color-on-secondary-fixed: #261900;
+    --color-hairline: #e5e5e5;
+
+    --radius-sm: 0.25rem;
+    --radius-DEFAULT: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    --spacing-margin-mobile: 20px;
+    --spacing-margin-desktop: 80px;
+    --spacing-section-gap: 120px;
+    --spacing-unit: 8px;
+    --spacing-gutter: 24px;
+    --spacing-container-max: 1280px;
+
+    --font-display: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --text-label-sm: 0.75rem;
+    --text-label-sm--line-height: 1;
+    --text-label-sm--letter-spacing: 0.05em;
+    --text-label-sm--font-weight: 500;
+
+    --text-headline-sm: 1.5rem;
+    --text-headline-sm--line-height: 1.3;
+    --text-headline-sm--font-weight: 600;
+
+    --text-display-lg: 4.5rem;
+    --text-display-lg--line-height: 1.1;
+    --text-display-lg--letter-spacing: -0.02em;
+    --text-display-lg--font-weight: 700;
+
+    --text-body-md: 1rem;
+    --text-body-md--line-height: 1.6;
+    --text-body-md--font-weight: 400;
+
+    --text-headline-md: 2rem;
+    --text-headline-md--line-height: 1.2;
+    --text-headline-md--letter-spacing: 0.02em;
+    --text-headline-md--font-weight: 600;
+
+    --text-label-lg: 0.875rem;
+    --text-label-lg--line-height: 1;
+    --text-label-lg--letter-spacing: 0.1em;
+    --text-label-lg--font-weight: 600;
+
+    --text-body-lg: 1.125rem;
+    --text-body-lg--line-height: 1.6;
+    --text-body-lg--font-weight: 400;
+
+    --text-display-md: 3.5rem;
+    --text-display-md--line-height: 1.1;
+    --text-display-md--letter-spacing: -0.02em;
+    --text-display-md--font-weight: 700;
+
+    --text-headline-lg: 2.5rem;
+    --text-headline-lg--line-height: 1.2;
+    --text-headline-lg--letter-spacing: 0.05em;
+    --text-headline-lg--font-weight: 600;
+
+    --shadow-ambient: 0px 12px 32px rgba(0, 0, 0, 0.04);
+
+    /* Admin dashboard shell (screenshot-matched) */
+    --color-admin-canvas: #f4f6f8;
+    --color-admin-sidebar: #ffffff;
+    --shadow-admin-card: 0 1px 2px 0 rgb(15 23 42 / 0.05), 0 1px 3px 0 rgb(15 23 42 / 0.08);
+    --shadow-admin-card-hover: 0 8px 24px -6px rgb(1 38 31 / 0.12);
+
+    /* One scale only: 8px controls · 16px surfaces · full = avatars/badges */
+    --radius-admin-control: 0.5rem;
+    --radius-admin-surface: 1rem;
+}
+
+@utility font-display {
+    font-family: var(--font-display);
+}
+
+@utility font-body {
+    font-family: var(--font-body);
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+html.material-icons-ready .material-symbols-outlined {
+    transition: opacity 0.12s ease-out;
+}
+
+@utility material-symbol {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+@utility material-symbol-filled {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+@utility shadow-admin-card {
+    box-shadow: var(--shadow-admin-card);
+}
+
+@utility shadow-admin-card-hover {
+    box-shadow: var(--shadow-admin-card-hover);
+}
+
+@utility rounded-admin-control {
+    border-radius: var(--radius-admin-control);
+}
+
+@utility rounded-admin-surface {
+    border-radius: var(--radius-admin-surface);
+}
+
+@utility admin-input {
+    @apply w-full rounded-admin-control border border-slate-200 bg-white px-4 py-2.5 text-slate-800 outline-none transition-shadow;
+    @apply focus:border-primary focus:ring-2 focus:ring-primary/15;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+/* Admin shell layout — fixed sidebar + offset main content */
+@media (min-width: 1024px) {
+    .admin-main-shell {
+        margin-left: 260px;
+        width: calc(100% - 260px);
+        transition: margin-left 0.3s ease-out, width 0.3s ease-out;
+    }
+
+    html[data-sidebar-collapsed='true'] .admin-main-shell {
+        margin-left: 4.75rem;
+        width: calc(100% - 4.75rem);
+    }
+
+    html[data-sidebar-collapsed='true'] .admin-sidebar {
+        width: 4.75rem;
+    }
+}
+
+/* Collapsed icon rail (desktop) */
+html[data-sidebar-collapsed='true'] .admin-sidebar-label,
+html[data-sidebar-collapsed='true'] .admin-sidebar-section,
+html[data-sidebar-collapsed='true'] .admin-sidebar-brand-text,
+html[data-sidebar-collapsed='true'] .admin-sidebar-user-meta,
+html[data-sidebar-collapsed='true'] .admin-sidebar-footer-link {
+    display: none;
+}
+
+html[data-sidebar-collapsed='true'] .admin-sidebar-brand {
+    justify-content: center;
+}
+
+html[data-sidebar-collapsed='true'] .admin-sidebar-nav-item {
+    justify-content: center;
+    padding: 0.625rem;
+}
+
+html[data-sidebar-collapsed='true'] .admin-sidebar-user {
+    justify-content: center;
+    padding: 0.75rem;
+}
+
+html[data-sidebar-collapsed='true'] .admin-sidebar-logout {
+    display: block;
+}
+
+@keyframes admin-toast-enter {
+    from {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes admin-toast-exit {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+}
+
+@keyframes admin-toast-progress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+[data-admin-toast].is-visible {
+    animation: admin-toast-enter 0.35s ease-out forwards;
+}
+
+[data-admin-toast].is-leaving {
+    animation: admin-toast-exit 0.25s ease-in forwards;
+}
+
+[data-admin-toast-progress] {
+    width: 100%;
+    animation: admin-toast-progress var(--toast-duration, 5000ms) linear forwards;
+}
+
+[data-admin-toast]:hover [data-admin-toast-progress] {
+    animation-play-state: paused;
+}
+
+.admin-calendar {
+    --fc-border-color: #e2e8f0;
+    --fc-button-bg-color: #01261f;
+    --fc-button-border-color: #01261f;
+    --fc-button-hover-bg-color: #023d32;
+    --fc-button-hover-border-color: #023d32;
+    --fc-button-active-bg-color: #001a15;
+    --fc-button-active-border-color: #001a15;
+    --fc-today-bg-color: rgb(1 38 31 / 0.06);
+    --fc-event-text-color: #fff;
+    --fc-page-bg-color: #fff;
+    --fc-neutral-bg-color: #f8fafc;
+}
+
+.admin-calendar .fc-toolbar-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.admin-calendar .fc-button {
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.admin-calendar .fc-col-header-cell-cushion,
+.admin-calendar .fc-daygrid-day-number {
+    color: #64748b;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.admin-calendar.is-loading {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.admin-calendar .fc-event {
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
