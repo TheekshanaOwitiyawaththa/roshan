@@ -10,11 +10,14 @@ use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DebugHttpsDiagnosticsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+
+Route::get('/debug/https-e5826c', DebugHttpsDiagnosticsController::class);
 
 Route::middleware('guest')->prefix('admin')->name('admin.')->group(function (): void {
     Route::get('login', [LoginController::class, 'create'])->name('login');
