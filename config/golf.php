@@ -156,8 +156,8 @@ return [
     ],
 
     'images' => [
-        'hero_portrait' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDldEv9-1SMMGNvSrFRnS2VwF3RBE94tsQvv1EU8qvAMcxNs2WvNuEije0Bee5xnk6HEfDdaICCjtUjzOs_Kzk3j-JEgQV-6VKshlkjDrHPhT_Q7ahGMCGa1FZlo-9wVv2W-XPoc_FHsIEHsaXn6j4RqbtL85GK1tcZuHy_XuwAPyQtHNHTuhPj8E7clCesJlWwl9NKfyo5uaU-CkHs0FCwfnRaqZ5j3cKvMoZ8NJK7tTt24ufLiMZDAbxqJsKaPjVlXYupPvkdZSrH',
-        'about_coach' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqYZsJ42PsaL0rIo41-vWmud68GgytRIxztsPjDteLxWJ1SdDhL8CLGmbWZUXEl2GpDANwLbyRXCqjX5TZgBmd2MbwRJvY_NRyyXyaLq6bcXIk6gMD-FqaQUW-Pwld7I6Vzz5tf8iq5Av5v36i6DrUT5h1V_1pxnZ2coRyRkv3047Ckggy-1jtPjPCNndwRocJn6kRjfMqLannFkl7rwp7oK7VkZRp0m3AzqK53hYfmz2rukpHzV1EWPMTaYjnPdp1yJE6dhZ1qBhX',
+        'hero_portrait' => '/images/2.png',
+        'about_coach' => '/images/1.png',
     ],
 
     'connect_links' => ['Instagram', 'Google', 'LinkedIn'],
