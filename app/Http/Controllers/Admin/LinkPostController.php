@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\HandlesAdminDataTable;
+use App\Http\Controllers\Admin\Concerns\HandlesUploadedImages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreLinkPostRequest;
 use App\Http\Requests\Admin\UpdateLinkPostRequest;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class LinkPostController extends Controller
 {
     use HandlesAdminDataTable;
+    use HandlesUploadedImages;
 
     public function index(Request $request): View|StreamedResponse
     {
@@ -26,7 +28,7 @@ class LinkPostController extends Controller
         if ($this->wantsCsvExport($request)) {
             return AdminCsvExport::download(
                 $query,
-                ['Order', 'Image alt', 'Image URL', 'Instagram URL', 'Status'],
+                ['Order', 'Image alt', 'Image', 'Instagram URL', 'Status'],
                 fn (LinkPost $post) => [
                     $post->sort_order,
                     $post->image_alt,
@@ -70,7 +72,7 @@ class LinkPostController extends Controller
 
     public function update(UpdateLinkPostRequest $request, LinkPost $linkPost): RedirectResponse
     {
-        $linkPost->update($this->payload($request));
+        $linkPost->update($this->payload($request, $linkPost));
 
         return redirect()
             ->route('admin.link-posts.index')
@@ -89,12 +91,19 @@ class LinkPostController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function payload(StoreLinkPostRequest|UpdateLinkPostRequest $request): array
+    private function payload(StoreLinkPostRequest|UpdateLinkPostRequest $request, ?LinkPost $linkPost = null): array
     {
-        return [
-            ...$request->validated(),
+        $payload = [
+            ...$request->safe()->except('image'),
             'is_active' => $request->boolean('is_active'),
             'sort_order' => $request->integer('sort_order', 0),
         ];
+
+        return $this->mergeUploadedImage(
+            $request,
+            $payload,
+            'link-posts',
+            $linkPost?->getRawOriginal('image_path'),
+        );
     }
 }

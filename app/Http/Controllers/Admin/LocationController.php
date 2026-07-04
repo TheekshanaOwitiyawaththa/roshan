@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\HandlesAdminDataTable;
+use App\Http\Controllers\Admin\Concerns\HandlesUploadedImages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreLocationRequest;
 use App\Http\Requests\Admin\UpdateLocationRequest;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class LocationController extends Controller
 {
     use HandlesAdminDataTable;
+    use HandlesUploadedImages;
 
     public function index(Request $request): View|StreamedResponse
     {
@@ -70,7 +72,7 @@ class LocationController extends Controller
 
     public function update(UpdateLocationRequest $request, Location $location): RedirectResponse
     {
-        $location->update($this->payload($request));
+        $location->update($this->payload($request, $location));
 
         return redirect()
             ->route('admin.locations.index')
@@ -89,12 +91,19 @@ class LocationController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function payload(StoreLocationRequest|UpdateLocationRequest $request): array
+    private function payload(StoreLocationRequest|UpdateLocationRequest $request, ?Location $location = null): array
     {
-        return [
-            ...$request->validated(),
+        $payload = [
+            ...$request->safe()->except('image'),
             'is_active' => $request->boolean('is_active'),
             'sort_order' => $request->integer('sort_order', 0),
         ];
+
+        return $this->mergeUploadedImage(
+            $request,
+            $payload,
+            'locations',
+            $location?->getRawOriginal('image_path'),
+        );
     }
 }

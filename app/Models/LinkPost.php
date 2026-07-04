@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Support\PublicImageStorage;
 use Database\Factories\LinkPostFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
+    'image_path',
     'image_url',
     'image_alt',
     'instagram_url',
@@ -29,6 +32,27 @@ class LinkPost extends Model
             'is_active' => 'boolean',
             'sort_order' => 'integer',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (LinkPost $linkPost): void {
+            PublicImageStorage::delete($linkPost->getRawOriginal('image_path'));
+        });
+    }
+
+    /**
+     * @return Attribute<?string, never>
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(function (?string $value, array $attributes): ?string {
+            if (! empty($attributes['image_path'])) {
+                return PublicImageStorage::url($attributes['image_path']);
+            }
+
+            return $value;
+        });
     }
 
     /**

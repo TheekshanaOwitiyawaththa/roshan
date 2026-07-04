@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class UpdateLinkPostRequest extends FormRequest
 {
@@ -17,7 +18,7 @@ class UpdateLinkPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image_url' => ['required', 'url', 'max:2048'],
+            'image' => ['nullable', File::image()->max(5120)],
             'image_alt' => ['required', 'string', 'max:500'],
             'instagram_url' => ['nullable', 'url', 'max:2048'],
             'is_active' => ['sometimes', 'boolean'],

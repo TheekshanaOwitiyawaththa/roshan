@@ -1,6 +1,6 @@
 @props(['linkPost' => null, 'action', 'method' => 'POST'])
 
-<form method="POST" action="{{ $action }}" class="max-w-2xl space-y-6">
+<form method="POST" action="{{ $action }}" enctype="multipart/form-data" class="max-w-2xl space-y-6">
     @csrf
     @if ($method !== 'POST')
         @method($method)
@@ -8,16 +8,11 @@
 
     <x-admin.panel>
         <div class="space-y-5">
-            <div>
-                <label for="image_url" class="mb-1.5 block text-xs font-semibold tracking-wide text-slate-500 uppercase">Image URL</label>
-                <input id="image_url" name="image_url" type="url" value="{{ old('image_url', $linkPost?->image_url) }}" required class="admin-input">
-                <p class="mt-1 text-xs text-slate-500">Square images work best in the gallery grid.</p>
-            </div>
-            @if (old('image_url', $linkPost?->image_url))
-                <div class="overflow-hidden rounded-admin-surface border border-slate-200">
-                    <img src="{{ old('image_url', $linkPost?->image_url) }}" alt="Preview" class="aspect-video w-full object-cover">
-                </div>
-            @endif
+            <x-admin.image-upload
+                :current-url="$linkPost?->image_url"
+                :required="! $linkPost"
+                hint="Square JPEG, PNG, or WebP images up to 5 MB work best in the gallery grid."
+            />
             <div>
                 <label for="image_alt" class="mb-1.5 block text-xs font-semibold tracking-wide text-slate-500 uppercase">Image alt text</label>
                 <input id="image_alt" name="image_alt" type="text" value="{{ old('image_alt', $linkPost?->image_alt) }}" required class="admin-input">

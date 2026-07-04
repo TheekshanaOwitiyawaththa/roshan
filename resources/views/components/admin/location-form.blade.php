@@ -1,6 +1,6 @@
 @props(['location' => null, 'action', 'method' => 'POST'])
 
-<form method="POST" action="{{ $action }}" class="max-w-2xl space-y-6">
+<form method="POST" action="{{ $action }}" enctype="multipart/form-data" class="max-w-2xl space-y-6">
     @csrf
     @if ($method !== 'POST')
         @method($method)
@@ -20,10 +20,10 @@
                 <label for="map_url" class="mb-1.5 block text-xs font-semibold tracking-wide text-slate-500 uppercase">Map URL</label>
                 <input id="map_url" name="map_url" type="url" value="{{ old('map_url', $location?->map_url) }}" class="admin-input">
             </div>
-            <div>
-                <label for="image_url" class="mb-1.5 block text-xs font-semibold tracking-wide text-slate-500 uppercase">Image URL</label>
-                <input id="image_url" name="image_url" type="url" value="{{ old('image_url', $location?->image_url) }}" class="admin-input">
-            </div>
+            <x-admin.image-upload
+                :current-url="$location?->image_url"
+                hint="Landscape JPEG, PNG, or WebP images up to 5 MB work best for location cards."
+            />
             <div>
                 <label for="image_alt" class="mb-1.5 block text-xs font-semibold tracking-wide text-slate-500 uppercase">Image alt text</label>
                 <input id="image_alt" name="image_alt" type="text" value="{{ old('image_alt', $location?->image_alt) }}" class="admin-input">
